@@ -1,0 +1,22 @@
+<h1>確認画面</h1>
+
+<%= form_with(model: @picture, url: pictures_path,local: true) do |form| %>
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_area :content %>
+  </div>
+
+
+  <%= image_tag(@picture.image.url) if @picture.image && @picture.image.url %>
+  <%= form.hidden_field :image_cache %>
+  <%= form.submit "投稿する" %>
+<% end %>
+<%= form_with(model: @picture, url: new_picture_path,local: true, method:"get") do |form| %>
+  <%= form.hidden_field :image_cache %>
+  <%= form.submit "戻る", name: "back" %>
+<% end %>
